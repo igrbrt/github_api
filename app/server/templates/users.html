@@ -1,0 +1,83 @@
+{% extends 'index.html' %} {% block content %}
+<section class="text-gray-600 body-font w-full flex flex-row">
+  {% if userRepositories %} {% if userRepositories.username %}
+  <div class="w-1/3 p-4">
+    <div
+      class="flex border-2 rounded-lg border-gray-200 border-opacity-50 p-8 flex-col justify-start items-start"
+    >
+      <img
+        alt="content"
+        class="w-full object-cover object-center rounded-lg h-64"
+        src="{{ userRepositories.avatar_url }}"
+      />
+      <div
+        class="leading-relaxed text-base mt-2 w-full flex flex-row justify-between"
+      >
+        <div>
+          <span class="font-bold text-gray-900">User:</span>
+          {{ userRepositories.username }}
+        </div>
+        <span
+          class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20"
+          >{{ userRepositories.status }}</span
+        >
+      </div>
+    </div>
+  </div>
+  {% endif %} {% endif %}
+  <div class="container w-full px-5 flex flex-col justify-center items-center">
+    {% if userRepositories %} {% for repository in userRepositories.repositories
+    %}
+    <div class="w-full p-4">
+      <div
+        class="flex border-2 rounded-lg border-gray-200 border-opacity-50 p-8 sm:flex-row flex-col"
+      >
+        <div
+          class="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex items-center justify-center"
+        >
+          {% if repository['language'] != '' %}
+          <i
+            class="devicon-{{'html5' if repository['language'].lower() == 'html' else repository['language'].lower()}}-plain colored text-6xl"
+          ></i>
+          {% else %}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
+            ></path>
+          </svg>
+          {% endif %}
+        </div>
+        <div class="flex flex-col text-left">
+          <h2 class="text-gray-900 text-lg title-font font-bold mb-3">
+            {{ repository['name'] }}
+          </h2>
+          <p class="leading-relaxed text-base">
+            <span class="font-bold text-gray-900">Description:</span>
+            {{ repository['description'] }}
+          </p>
+          <p class="leading-relaxed text-base">
+            <span class="font-bold text-gray-900">URL:</span>
+            <a href="{{ repository['html_url'] }}" target="_blank">
+              {{ repository['html_url'] }}
+            </a>
+          </p>
+          <p class="leading-relaxed text-base">
+            <span class="font-bold text-gray-900">Language:</span> {{
+            repository['language'] }}
+          </p>
+        </div>
+      </div>
+    </div>
+    {% endfor %} {% endif %}
+  </div>
+</section>
+{% endblock %}

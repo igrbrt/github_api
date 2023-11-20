@@ -1,0 +1,17 @@
+{
+  "name": "github-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:dev": "flask run --debug && npx tailwindcss -i ./app/server/static/css/input.css -o ./app/server/static/css/main.css --watch",
+    "start": "flask run && npx tailwindcss -i ./app/server/static/css/input.css -o ./app/server/static/css/main.css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "tailwindcss": "^3.3.5"
+  }
+}
